@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GasolinerasEspana.MainPage">
+    
+  
+    <Grid>
+        <BoxView Color="LightGray" Opacity="0.8" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <ScrollView Grid.Row="0">
+
+            <StackLayout Grid.Row="1"  >
+                <SearchBar TextChanged="btnFiltro" HorizontalTextAlignment="Start" TextColor="Black" PlaceholderColor="Black" CancelButtonColor="Black" BackgroundColor="Transparent" Keyboard="Text" FontAttributes="Bold" Placeholder="Búsqueda por nombre o provincia" HorizontalOptions="FillAndExpand" x:Name="bBusqueda"></SearchBar>
+                <StackLayout>
+                    <ListView x:Name="lvGasolineras" HasUnevenRows="True" ItemTapped="ListGasolinerasTapped" ItemSelected="ListGasolinerasSeleccted" SeparatorVisibility="None" IsPullToRefreshEnabled="True" RefreshControlColor="Green" Scrolled="OnListViewScrolled" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <ViewCell>
+                                    <Grid Padding="5" >
+                                        <Frame BackgroundColor="WhiteSmoke" CornerRadius="5" BorderColor="Black" HasShadow="false">
+                                            <StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Image Source="{Binding IconGasolinera}" HorizontalOptions="Start" BackgroundColor="Transparent"/>
+                                                    <Label Text="{Binding Rotulo}" TextColor="Black" HorizontalOptions="StartAndExpand" TextDecorations="Underline" FontSize="Medium" FontAttributes="Bold"/>
+                                                    <Label Text="{Binding PrecioGasoleoA }" TextColor="Black" HorizontalOptions="EndAndExpand" TextDecorations="Underline" FontSize="Medium" FontAttributes="Bold"/>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Address}" TextColor="Black" HorizontalOptions="StartAndExpand" TextDecorations="Underline" FontSize="Medium" FontAttributes="Bold" />
+                                                    <Label Text="{Binding Horario}" TextColor="Black" HorizontalOptions="EndAndExpand" TextDecorations="Underline" FontSize="Medium" FontAttributes="Bold"/>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Address2}" TextColor="Black" HorizontalOptions="StartAndExpand" TextDecorations="Underline" FontSize="Medium" FontAttributes="Bold" />
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Distancia}" TextColor="Black" HorizontalOptions="StartAndExpand" TextDecorations="Underline" FontSize="Medium" FontAttributes="Bold" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
