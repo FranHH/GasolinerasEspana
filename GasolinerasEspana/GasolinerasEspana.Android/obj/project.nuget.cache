@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qGyn+z1f19mir7WVow2wnOKCUbJPX3pcBC39dJ+8J18+AxzrZMCpIDIXs1mq7ljwZWbySSTuax6vzqidS0aj4g==",
+  "dgSpecHash": "Qc5iLzUPF++2KCnUNAlRlohbSjnynaHXHRJb+cVLxZNS9CXa7L1rId2tpDV9JHsC6VKGpW+4MfjEJrmDBRFUvA==",
   "success": true,
-  "projectFilePath": "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\GasolinerasEspana.Android.csproj",
+  "projectFilePath": "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\GasolinerasEspana.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fjperez\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\fjperez\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

@@ -19,9 +19,13 @@ namespace GasolinerasEspana
 
         private string urlMaritimos = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/";
         private string urlTerrestres = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/";
-        private string geoLocal = "http://api.geonames.org/findNearbyJSON?formatted=true&lat=37.8859213&lng=-4.791809&fclass=P&fcode=PPLA&fcode=PPL&fcode=PPLC&username=frandev001&style=full"; //username=frandev001
+        private string urlListadoProvincias = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/Provincias/";
+        private string urlIDTerrestresProvincia = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProvincia/";
+        private string geoLocal = "http://api.geonames.org/findNearbyJSON?formatted=true&lat=37.8859213&lng=-4.791809&fclass=P&fcode=PPLA&fcode=PPL&fcode=PPLC&username=frandev001&style=full"; ///username=frandev001
         private string geoLocalenUso = "http://api.geonames.org/addressJSON?lat=37.8859213&lng=-4.791809&username=frandev001";
         private string urlAPIGoogle = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAI38hOHYgwfIU_1RQbqWRtKut4Plen7Eg";
+        static string DEFAULTPATH = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        private static bool exist = false;
         private HttpClient client = new HttpClient();
         private HttpResponseMessage response = null;
         private Gasolineras oGasolinera = null;
@@ -33,6 +37,7 @@ namespace GasolinerasEspana
         public MainPage()
         {
             InitializeComponent();
+            SaveFile();
             MostrarLista();
             #region Refrescar datos
             lvGasolineras.RefreshCommand = new Command(() =>
@@ -43,15 +48,239 @@ namespace GasolinerasEspana
             #endregion
         }
 
+        #region SaveFile
+        public async static void SaveFile()
+        {
+            var filePath = Path.Combine(DEFAULTPATH, "data_");
+            
+            if (!File.Exists(filePath))
+            {
+                File.WriteAllText(filePath,"");
+                exist = true;
+            }
+            else
+            {
+                exist = false;
+            }
+        }
+
+        #endregion
+
         private async void MostrarLista()
         {
-            //Obtengo response de api
-            response = await client.GetAsync(urlTerrestres);
-            //Si no hay error obtengo string de gasolineras
-            if (response.IsSuccessStatusCode)
+            string result = string.Empty;
+            //Obtengo la provincia del usuario
+            Task<double[]> locali = GetLocation();
+            string provincia = GetProvincia(locali);
+            switch (provincia.ToUpper())
             {
-                 jsonLista = response.Content.ReadAsStringAsync().Result;
+                case "ALBACETE":
+                    result = "02";
+                    break;
+
+                case "ALICANTE":
+                    result = "03";
+                    break;
+                case "ALMERÍA":
+                    result = "04";
+                    break;
+
+                case "ARABA":
+                    result = "01";
+                    break;
+                case "ÁLAVA":
+                    result = "01";
+                    break;
+
+                case "ASTURIAS":
+                    result = "33";
+                    break;
+                case "ÁVILA":
+                    result = "05";
+                    break;
+
+                case "BADAJOZ":
+                    result = "06";
+                    break;
+                case "BALEARS(ILLES)":
+                    result = "07";
+                    break;
+
+                case "BARCELONA":
+                    result = "08";
+                    break;
+                case "BIZKAIA":
+                    result = "48";
+                    break;
+                case "BURGOS":
+                    result = "09";
+                    break;
+                case "CÁCERES":
+                    result = "10";
+                    break;
+
+                case "CÁDIZ":
+                    result = "11";
+                    break;
+                case "CANTABRIA":
+                    result = "39";
+                    break;
+
+                case "CASTELLÓN":
+                    result = "12";
+                    break;
+                case "CEUTA":
+                    result = "51";
+                    break;
+
+                case "CIUDAD REAL":
+                    result = "13";
+                    break;
+                case "CÓRDOBA":
+                    result = "14";
+                    break;
+
+                case "CORUÑA":
+                    result = "15";
+                    break;
+                case "CUENCA":
+                    result = "16";
+                    break;
+
+                case "GIPUZKOA":
+                    result = "20";
+                    break;
+                case "GIRONA":
+                    result = "17";
+                    break;
+
+                case "GRANADA":
+                    result = "18";
+                    break;
+                case "GUADALAJARA":
+                    result = "19";
+                    break;
+
+                case "HUELVA":
+                    result = "21";
+                    break;
+                case "HUESCA":
+                    result = "22";
+                    break;
+
+                case "JAÉN":
+                    result = "23";
+                    break;
+                case "LEÓN":
+                    result = "24";
+                    break;
+
+                case "LLEIDA":
+                    result = "25";
+                    break;
+                case "LUGO":
+                    result = "27";
+                    break;
+
+                case "MADRID":
+                    result = "28";
+                    break;
+                case "MÁLAGA":
+                    result = "29";
+                    break;
+
+                case "MELILLA":
+                    result = "52";
+                    break;
+                case "MURCIA":
+                    result = "30";
+                    break;
+
+                case "NAVARRA":
+                    result = "31";
+                    break;
+                case "OURENSE":
+                    result = "32";
+                    break;
+
+                case "PALENCIA":
+                    result = "34";
+                    break;
+                case "LAS PALMAS":
+                    result = "35";
+                    break;
+
+                case "PONTEVEDRA":
+                    result = "36";
+                    break;
+                case "LA RIOJA":
+                    result = "26";
+                    break;
+
+                case "SALAMANCA":
+                    result = "37";
+                    break;
+                case "SANTA CRUZ DE TENERIFE":
+                    result = "38";
+                    break;
+
+                case "SEGOVIA":
+                    result = "40";
+                    break;
+                case "SEVILLA":
+                    result = "41";
+                    break;
+
+                case "SORIA":
+                    result = "42";
+                    break;
+                case "TARRAGONA":
+                    result = "43";
+                    break;
+
+                case "TERUEL":
+                    result = "44";
+                    break;
+                case "TOLEDO":
+                    result = "45";
+                    break;
+
+                case "VALENCIA":
+                    result = "46";
+                    break;
+                case "VALLADOLID":
+                    result = "47";
+                    break;
+
+                case "ZAMORA":
+                    result = "49";
+                    break;
+                case "ZARAGOZA":
+                    result = "50";
+                    break;
+
+                default:
+                    result = "-1";
+                    break;
             }
+            //Obtengo response de api
+            urlIDTerrestresProvincia += result;
+
+            HttpResponseMessage responseLocation = client.GetAsync(urlIDTerrestresProvincia).Result;
+            //Si no hay error obtengo string de localizacion
+            if (responseLocation.IsSuccessStatusCode)
+            {
+                jsonLista = responseLocation.Content.ReadAsStringAsync().Result;
+            }
+
+            //response = await client.GetAsync(urlTerrestres);
+            ////Si no hay error obtengo string de gasolineras
+            //if (response.IsSuccessStatusCode)
+            //{
+            //     jsonLista = response.Content.ReadAsStringAsync().Result;
+            //}
+
+
             //Moldeo el string de gasolineras para adaptarlo a mi modelo (ListaEESSPrecio)
             jsonLista = jsonLista.Replace("C.P.", "CP")
                 .Replace("Dirección", "Direccion")
@@ -78,8 +307,36 @@ namespace GasolinerasEspana
 
             //Deserializo listado de gasolineras
             oGasolinera = JsonConvert.DeserializeObject<Gasolineras>(jsonLista);
+
+            //lvGasolineras.ItemsSource = oGasolinera.ListaEESSPrecio.OrderBy(o => o.Distancia).ToList();
             //Obtengo las 100 primeras gasolineras en funcion de la ubicación del dispositivo movil y muestro en el listView la lista de gasolineras ordenadas por distancia
-            lvGasolineras.ItemsSource = GetListEESSLocation100First(GetLocation(), oGasolinera.ListaEESSPrecio).Result;
+            lvGasolineras.ItemsSource = GetListEESSLocation100First(locali, oGasolinera.ListaEESSPrecio).Result;
+            //lvGasolineras.ItemsSource = GetListEESSLocation100First(GetLocation(), oGasolinera.ListaEESSPrecio).Result;
+        }
+
+        private string GetProvincia(Task<double[]> listLocation)
+        {
+            //string url = "http://api.geonames.org/addressJSON?lat=" + listLocation.Result[0].ToString().Replace(",", ".") + "&lng=" + listLocation.Result[1].ToString().Replace(",", ".") + "&username=frandev001";
+            string testURL = "http://api.geonames.org/addressJSON?lat=37.8859213&lng=-4.7918054&username=frandev001";
+            try
+            {
+                HttpResponseMessage responseLocation = client.GetAsync(testURL).Result;
+                //Si no hay error obtengo string de localizacion
+                if (responseLocation.IsSuccessStatusCode)
+                {
+                    jsonGeo = responseLocation.Content.ReadAsStringAsync().Result;
+                }
+
+                //Deserializo localizacion
+                oAddress = JsonConvert.DeserializeObject<GetAddress>(jsonGeo);
+                return oAddress.Address.locality;
+
+            }
+            catch (Exception e)
+            {
+                return string.Empty;
+                DisplayAlert("Error", "Ha ocurrido un error al intentar obtener las gasolineras de su provincia", "Aceptar");
+            }
         }
 
         #region Filtro
@@ -165,25 +422,25 @@ namespace GasolinerasEspana
             double dLat, dLon, dA, dC, dDistancia = 0, dDistanciaAux=dRadio;
 
             IList<ListaEESSPrecio> liEESSAux = new List<ListaEESSPrecio>();
-            string url = "http://api.geonames.org/addressJSON?lat=" + listLocation.Result[0].ToString().Replace(",", ".") + "&lng=" + listLocation.Result[1].ToString().Replace(",", ".") + "&username=frandev001";
+            //string url = "http://api.geonames.org/addressJSON?lat=" + listLocation.Result[0].ToString().Replace(",", ".") + "&lng=" + listLocation.Result[1].ToString().Replace(",", ".") + "&username=frandev001";
             //string testURL = "http://api.geonames.org/addressJSON?lat=37.8859213&lng=-4.7918054&username=frandev001";
-            try
-            {
-                HttpResponseMessage responseLocation = client.GetAsync(url).Result;
-                //Si no hay error obtengo string de localizacion
-                if (responseLocation.IsSuccessStatusCode)
-                {
-                    jsonGeo = responseLocation.Content.ReadAsStringAsync().Result;
-                }
+            //try
+            //{
+            //    HttpResponseMessage responseLocation = client.GetAsync(testURL).Result;
+            //    //Si no hay error obtengo string de localizacion
+            //    if (responseLocation.IsSuccessStatusCode)
+            //    {
+            //        jsonGeo = responseLocation.Content.ReadAsStringAsync().Result;
+            //    }
 
-                //Deserializo localizacion
-                oAddress = JsonConvert.DeserializeObject<GetAddress>(jsonGeo);
+            //    //Deserializo localizacion
+            //    oAddress = JsonConvert.DeserializeObject<GetAddress>(jsonGeo);
 
-            }
-            catch (Exception e)
-            {
-                await DisplayAlert("Error", "Ha ocurrido un error al intentar obtener las gasolineras de su provincia", "Aceptar");
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    await DisplayAlert("Error", "Ha ocurrido un error al intentar obtener las gasolineras de su provincia", "Aceptar");
+            //}
 
             for (int i = 0; i < oGasolinera.ListaEESSPrecio.Count && liEESSAux.Count != 100; i++)
             {
@@ -224,6 +481,8 @@ namespace GasolinerasEspana
 
         }
         #endregion
+
+        
 
     }
 }

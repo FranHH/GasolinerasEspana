@@ -2186,11 +2186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\GasolinerasEspana.Android.csproj",
+      "projectUniqueName": "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\GasolinerasEspana.Android.csproj",
       "projectName": "GasolinerasEspana.Android",
-      "projectPath": "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\GasolinerasEspana.Android.csproj",
+      "projectPath": "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\GasolinerasEspana.Android.csproj",
       "packagesPath": "C:\\Users\\fjperez\\.nuget\\packages\\",
-      "outputPath": "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\obj\\",
+      "outputPath": "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -2215,8 +2215,8 @@
       "frameworks": {
         "monoandroid11.0": {
           "projectReferences": {
-            "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.csproj": {
-              "projectPath": "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.csproj"
+            "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.csproj": {
+              "projectPath": "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.csproj"
             }
           }
         }

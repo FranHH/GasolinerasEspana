@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F9dD7jrcLIxYiaIv/c2R/WI6kuTamdIavUWFdMkkK5Ev62pusYfyBZwGKGYzRR9ekqJPneV7VN7eksIY9zlvrA==",
+  "dgSpecHash": "H9Ga7u0lFNXLxnPuWN3ddv7UGE5yC/LvD+Gv4rMhWTREX9DhiHLA4GnpOFKdUqJGN5OKq8SUIhvw557viIUE7Q==",
   "success": true,
-  "projectFilePath": "C:\\ots\\CopiaSeg(Estable)\\VisualStudio\\Project_GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.csproj",
+  "projectFilePath": "C:\\ots\\VisualStudio\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana\\GasolinerasEspana.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fjperez\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\fjperez\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
